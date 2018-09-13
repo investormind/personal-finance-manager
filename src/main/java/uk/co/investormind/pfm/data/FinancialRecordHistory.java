@@ -2,6 +2,7 @@ package uk.co.investormind.pfm.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -12,10 +13,10 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "financial_record")
+@Table(name = "financial_record_history")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
-public class FinancialRecord {
+public class FinancialRecordHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,6 +27,9 @@ public class FinancialRecord {
 
     @Column(nullable = false)
     private LocalDate date;
+
+    @Column(nullable = false)
+    private Double interest;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
